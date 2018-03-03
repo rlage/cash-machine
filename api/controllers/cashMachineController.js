@@ -1,4 +1,4 @@
-exports.list_all_bills = function(req, res) {
+exports.list_all_bills = (req, res) => {
   let amount = req.params.amount;
   //$ 100,00; $ 50,00; $ 20,00 e $ 10,00
   let availableNotes = [100, 50, 20, 10];
@@ -6,8 +6,8 @@ exports.list_all_bills = function(req, res) {
   let index = 0;
   let rest = amount % availableNotes[index];
   let quo = Math.floor(amount / availableNotes[index]);
-
-  while ( rest > 0){
+  console.log(quo)
+  while ( rest > 0 || quo > 1){
     rest = amount % availableNotes[index];
     quo = Math.floor(amount / availableNotes[index]);
     console.log("bill ", availableNotes[index]);
