@@ -1,4 +1,9 @@
-# careship-test
+# To run this api
+1- `npm install`
+
+2- `npm start`
+
+it is also deployed on [heroku](https://rlage-cash-machine.herokuapp.com/withdraw/250). Just change the last number to test with other values.
 
 ## The Problem
 
