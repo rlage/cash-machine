@@ -22,5 +22,6 @@ exports.list_all_bills = (req, res) => {
   if (amount > 0 ) {
     resultNotes.push(availableNotes[index]);
   }
+  res.json(resultNotes);
   console.log(resultNotes);
 };
