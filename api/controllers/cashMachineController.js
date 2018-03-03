@@ -8,10 +8,11 @@ const NoteUnavailableException = require("../../errors/NoteUnavailableException"
  * @returns {array} returns an array with the notes
  */
 exports.calculateNotes = (amount) => {
-  if(amount < 0) {
-    throw new InvalidArgumentException;
-  }
   if(amount){
+    if(amount < 0) {
+      throw new InvalidArgumentException;
+    }
+
     let availableNotes = [100, 50, 20, 10];
     let resultNotes = [];
     let index = 0;
@@ -21,9 +22,11 @@ exports.calculateNotes = (amount) => {
     while (index < availableNotes.length && (rest > 0 || quo > 1)){
       rest = amount % availableNotes[index];
       quo = Math.floor(amount / availableNotes[index]);
+
       for (let j = 0; j < quo; j++) {
         resultNotes.push(availableNotes[index]);
       }
+
       index++;
       amount = rest;
     }
@@ -38,6 +41,7 @@ exports.calculateNotes = (amount) => {
   return [];
 
 }
+
 /**
  * This function receives the requisition and response objects,
  * calls calculateNotes
@@ -45,7 +49,6 @@ exports.calculateNotes = (amount) => {
  * @param {object} req
  * @param {object} res
  */
-
 exports.list_all_notes = (req, res) => {
   let amount = req.params.amount;
   try {
