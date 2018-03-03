@@ -48,5 +48,9 @@ exports.calculateNotes = (amount) => {
 
 exports.list_all_notes = (req, res) => {
   let amount = req.params.amount;
-  res.json(this.calculateNotes(amount));
+  try {
+    res.json(this.calculateNotes(amount));
+  } catch (error) {
+    res.json(error.message);
+  }
 };
