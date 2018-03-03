@@ -42,15 +42,3 @@ Result: throw InvalidArgumentException
 Entry: NULL
 
 Result: [Empty Set]
-
-## The Deliverables:
-
-Make sure your code is well written, focus in good practices and prepare a small (10 minutes) talk/explanation about the decisions in your code/architecture. 
-The usage of libraries or frameworks is allowed, if this make your test easier or better feel free to make use of those.
-With the test please delivery:
-
-* API endpoint(s) to test the code
-
-* Tests
-
-* any other material you think could be relevant to enrich your test and why
