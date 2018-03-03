@@ -1,4 +1,4 @@
-# To run this api
+# To run this API
 1- `npm install`
 
 2- `npm start`
