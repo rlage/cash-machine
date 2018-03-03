@@ -1,40 +1,52 @@
+const InvalidArgumentException = require("../../errors/InvalidArgumentException");
+const NoteUnavailableException = require("../../errors/NoteUnavailableException");
+
 /**
- * Calculates the minimum number of bills needed
+ * Calculates the minimum number of notes needed
  * to reach the amount
  * @param {number} amount
- * @returns {array} returns an array with the bills
+ * @returns {array} returns an array with the notes
  */
-const calculateBills = (amount) => {
-  let availableBills = [100, 50, 20, 10];
-  let resultBills = [];
-  let index = 0;
-  let rest = amount % availableBills[index];
-  let quo = Math.floor(amount / availableBills[index]);
+exports.calculateNotes = (amount) => {
+  if(amount < 0) {
+    throw new InvalidArgumentException;
+  }
+  if(amount){
+    let availableNotes = [100, 50, 20, 10];
+    let resultNotes = [];
+    let index = 0;
+    let rest = amount % availableNotes[index];
+    let quo = Math.floor(amount / availableNotes[index]);
 
-  while ( rest > 0 || quo > 1){
-    rest = amount % availableBills[index];
-    quo = Math.floor(amount / availableBills[index]);
-    for (let j = 0; j < quo; j++) {
-      resultBills.push(availableBills[index]);
+    while (index < availableNotes.length && (rest > 0 || quo > 1)){
+      rest = amount % availableNotes[index];
+      quo = Math.floor(amount / availableNotes[index]);
+      for (let j = 0; j < quo; j++) {
+        resultNotes.push(availableNotes[index]);
+      }
+      index++;
+      amount = rest;
     }
-    index++;
-    amount = rest;
+    if (amount > 0) {
+      resultNotes.push(availableNotes[index]);
+    }
+    if(rest !== 0){
+      throw new NoteUnavailableException;
+    }
+    return resultNotes;
   }
-  if (amount > 0 ) {
-    resultBills.push(availableBills[index]);
-  }
-  return resultBills;
+  return [];
 
 }
 /**
  * This function receives the requisition and response objects,
- * calls calculateBills
- * and respond with a list of bills
+ * calls calculateNotes
+ * and respond with a list of notes
  * @param {object} req
  * @param {object} res
  */
 
-exports.list_all_bills = (req, res) => {
+exports.list_all_notes = (req, res) => {
   let amount = req.params.amount;
-  res.json(calculateBills(amount));
+  res.json(this.calculateNotes(amount));
 };
